@@ -26,10 +26,11 @@ class StandardDeck(Deck):
         for suit in Suit:
             for rank in Rank:
                 decklist.append(Card(suit, rank))
-        random.shuffle(decklist)
+        self.shuffle(decklist)
         return decklist
 
     def draw(self) -> Card:
+        # if deck is (near) empty, shuffle discard into deck
         if len(self.deck_pile) <= 1:
             self.deck_pile.extend(self.discard_pile)
             self.discard_pile = []
