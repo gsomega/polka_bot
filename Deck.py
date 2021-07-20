@@ -1,6 +1,5 @@
-from Dealer import Card
 from typing import List
-from CardTypes import Suit, Rank
+from CardTypes import Suit, Rank, Card
 import random
 
 class Deck:
@@ -19,6 +18,7 @@ class Deck:
 class StandardDeck(Deck):
     def __init__(self):
         self.deck_pile = self._create_desklist()
+        self.shuffle()
         self.discard_pile: List[Card] = []
 
     def _create_desklist(self) -> List[Card]:
@@ -26,7 +26,6 @@ class StandardDeck(Deck):
         for suit in Suit:
             for rank in Rank:
                 decklist.append(Card(suit, rank))
-        self.shuffle(decklist)
         return decklist
 
     def draw(self) -> Card:
@@ -42,3 +41,4 @@ class StandardDeck(Deck):
 
     def discard(self, card: Card):
         self.discard_pile.append(card)
+
