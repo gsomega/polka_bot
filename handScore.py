@@ -72,9 +72,24 @@ def x_of_a_kind(hand: List[Card]):
 def hand_score(hand: List[Card]):
         hand.sort(key=lambda x: x.number)
         result = []
-        if is_flush(hand):
-
-
+        Flush = is_flush(hand)
+        Straight = is_straight(hand)
+        Kinds = x_of_a_kind(hand)
+        if Flush and Straight:
+            if hand[3].number == 13:
+                return [1] #royal flush
+            else:
+                return [2,hand[3].number] #straight flush
+        elif Kinds[0]==3 or Kinds[0]==4:
+            return Kinds
+        elif Flush:
+            kickers = [i.number for i in hand]
+            result = [5].extend(kickers[::-1])
+            return result
+        elif Straight:
+            return [6, hand[3].number]  # straight
+        else:
+            return Kinds
 
 def best_hand(board, hand):
     pass
